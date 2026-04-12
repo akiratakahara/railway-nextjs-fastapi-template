@@ -12,11 +12,15 @@ Railway上でNext.js（フロントエンド）+ FastAPI（バックエンド）
 
 ## ファイル構成
 
-```
+```text
 .
 ├── README.md                    # このファイル
 ├── docs/
-│   └── RAILWAY_SETUP_GUIDE.md   # 詳細な環境構築ガイド
+│   ├── RAILWAY_SETUP_GUIDE.md   # Railway環境構築ガイド
+│   ├── GEMINI_API_SETUP.md      # Gemini API セットアップ
+│   ├── APPSTORE_REVIEW_GUIDE.md # App Store審査ノウハウ
+│   ├── IAP_IMPLEMENTATION_GUIDE.md # IAP(課金)実装ガイド
+│   └── EAS_BUILD_GUIDE.md       # EAS Build & Submitガイド
 ├── backend/
 │   ├── Dockerfile               # バックエンド用Dockerfile
 │   ├── requirements.txt         # Python依存関係（例）
@@ -29,6 +33,16 @@ Railway上でNext.js（フロントエンド）+ FastAPI（バックエンド）
     ├── next.config.js           # Next.js設定
     └── .env.example             # 環境変数サンプル
 ```
+
+## ドキュメント一覧
+
+| ドキュメント | 内容 |
+|-------------|------|
+| [Railway環境構築ガイド](docs/RAILWAY_SETUP_GUIDE.md) | Railway上でのプロジェクト作成、PostgreSQL設定、502エラー対策、CORS設定 |
+| [Gemini API セットアップ](docs/GEMINI_API_SETUP.md) | Google Gemini APIの設定、SDK、トラブルシューティング |
+| [App Store審査ノウハウ](docs/APPSTORE_REVIEW_GUIDE.md) | 審査リジェクト実体験、メタデータ注意点、サブスク必須要件、提出前チェックリスト |
+| [IAP実装ガイド](docs/IAP_IMPLEMENTATION_GUIDE.md) | react-native-iap v14+、レシート検証、Sandbox テスト、エラーハンドリング |
+| [EAS Build & Submitガイド](docs/EAS_BUILD_GUIDE.md) | EASビルド、ビルド番号管理、署名設定、デバッグコード除去 |
 
 ## クイックスタート
 
@@ -58,6 +72,12 @@ cp -r railway-nextjs-fastapi-template/* your-new-project/
 - [ ] `postgres://` → `postgresql://` 変換処理がある
 - [ ] `output: 'standalone'` が設定されている（Next.js）
 - [ ] 環境変数がすべて設定されている
+
+## Railway デプロイの注意点
+
+- `railway redeploy` は**前回の成功デプロイを再実行**する（最新コミットではない）
+- GitHub自動デプロイが動かない場合は新しいコミットをpushして強制トリガー
+- DB migrationはビルド時ではなく `start.sh` で実行（Dockerビルド時はDB接続不可）
 
 ## ライセンス
 
